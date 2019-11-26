@@ -81,7 +81,7 @@ export class GridComponent implements OnInit {
       const selectedRaws = this.gridApi.getSelectedRows();
       this.selectedCount = selectedRaws.length;
     },
-    allowContextMenuWithControlKey: true
+    rowSelection: 'multiple'
   }
 
   modules = AllCommunityModules;
