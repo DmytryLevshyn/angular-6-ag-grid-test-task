@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { take, map, filter, switchMap, flatMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { VideoItem } from '../models/video-item'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,10 +19,12 @@ export class LoaderService {
     private http: HttpClient
   ) { }
 
-  getData() : Observable<any>{
+  getData() : Observable<VideoItem[]>{
     return this.http.get(dataUrl, httpOptions).pipe(
       map(res => {
-        return (res as any).items.map(item => item.snippet)
+        return (res as any).items.map((item: Object) => {
+          return new VideoItem({ videoId: (item as any).id.videoId , ...(item as any).snippet })
+        })
       })
     )
   }

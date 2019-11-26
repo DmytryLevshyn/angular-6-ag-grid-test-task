@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp, AgGridAngular } from '@ag-grid-community/angular';
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-title-template',
@@ -9,6 +10,7 @@ import { ICellRendererAngularComp, AgGridAngular } from '@ag-grid-community/angu
 export class TitleTemplateComponent implements ICellRendererAngularComp {
 
   public params: any;
+  apiUrl = environment.API_URL;
 
   constructor() { }
 

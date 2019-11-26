@@ -1,20 +1,28 @@
 <div class="main-container">
     <div class="grid-container">
         <div class="header-toolbar">
-            <div class="el-container">
+            <div class="el-container" *ngIf = "!selectionEnabled">
                 <button class="btn btn-primary" (click)="switchSelection()">
-                    switch selection
+                    enable selection
+                </button>
+            </div>
+            <div class="el-container" *ngIf = "selectionEnabled">
+                <button class="btn btn-secondary" (click)="switchSelection()">
+                    disable selection
                 </button>
             </div>
             <div class="el-container">
                 <span>Total count {{totalCount}}</span>
             </div>
             <div class="el-container">
-                <span [hidden] = "!selection">Selcted count {{selectedCount}}</span>
+                <span [hidden] = "!selectionEnabled">Selcted count {{selectedCount}}</span>
             </div>
         </div>
-        <ag-grid-angular #myGrid class="ag-theme-balham scrollbar" [gridOptions]="gridOptions" [modules]="modules" (gridReady)="onGridReady($event)"
-            [allowContextMenuWithControlKey]="true" [getContextMenuItems]="getContextMenuItems">
+        <ag-grid-angular 
+        class="ag-theme-balham scrollbar" 
+        [gridOptions]="gridOptions" 
+        [modules]="modules" 
+        (gridReady)="onGridReady($event)">
         </ag-grid-angular>
     </div>
 </div>
